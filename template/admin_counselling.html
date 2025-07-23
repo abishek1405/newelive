@@ -1,0 +1,1113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .video-text {
+      color: rgb(0, 0, 0);
+      max-width: 90%;
+      padding: 2rem;
+      text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.527);
+    }
+
+    .video-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .video-text p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .video-text h1 {
+        font-size: 1.3rem;
+      }
+
+      .video-text p {
+        font-size: 0.9rem;
+      }
+      .video-text{
+        padding: 1rem;
+        text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.164);
+      }
+    }
+  </style>
+
+
+  <div class="video-section">
+    <video autoplay muted loop>
+      <source src="{% static 'img/hero2.2.mp4' %}" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-text">
+      <h1 class="season">Admission Counselling</h1>
+      <p>
+          With resources that surpass those of the top US high schools combined, we
+      offer superior support, counselors, and strategies to drive your student's
+      college admissions journey.
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<style>
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 100px;
+  }
+  .profile {
+    width: 100%;
+  }
+</style>
+
+<style>
+  .profile-part,
+  .profile-part90 {
+    display: inline-block;
+    position: relative;
+    padding-top: 8px; /* optional, to give space if needed */
+  }
+
+  .profile-part::after,
+  .profile-part90::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0; /* <-- Changed from bottom to top */
+    height: 4px;
+    background-color: orange;
+    width: 0;
+    transition: width 1.5s ease-out;
+    border-radius: 10px;
+  }
+
+  .profile-part.animate::after {
+    width: 100%;
+  }
+
+  .profile-part90.animate::after {
+    width: 90%;
+  }
+
+  .green {
+    color: #003c32;
+  }
+  .head {
+    font-size: 3vw;
+  }
+  .para {
+    font-size: 1.3vw;
+  }
+  .lii {
+    list-style-type: none;
+    padding: 0px;
+    margin-top: 17px;
+  }
+
+  .ull {
+    padding: 0;
+  }
+
+  .about-div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .content-cuter {
+    width: 95%;
+  }
+
+  .admin_counselling_head {
+    font-size: 2.5rem;
+    text-align: left;
+    font-weight: 800;
+  }
+
+  @media (max-width:768px) {
+    .profile-container{
+      padding-left: 20px;
+    }
+    .admin_counselling_head {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<div class="container-fluid bg-white py-5">
+  <div class="row">
+    <div class="col-12  profile-container">
+      <ul class="ull col-md-7 col-12 m-0 animated-heading profile-part">
+        <li class="lii m-0">
+          <h1 class="orange admin_counselling_head p-0 season m-0">
+            Undergraduate Admissions Graduate School Admissions ProBono
+          </h1>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+ <style>
+  .admin-containers{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* Changed from 'center' to 'stretch' */
+    height: inherit;
+  }
+  .admin-counselling1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 30vw; /* Changed from max-width to width */
+    padding: 50px;
+    background-color: #003c32;
+  }
+  .admin-counselling2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #6D8A83;
+    flex-grow: 1; /* Added to take remaining space */
+    padding: 50px;
+  }
+  .admin-counselling-head{
+    font-size: 3rem;
+    color: white;
+  }
+  .admin-inner1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+  }
+  .admin-inner2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    color: white;
+    padding: 20px; /* Added for better spacing */
+  }
+  .admin-inner3{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .admin-counselling-para{
+    font-size: 1.2rem;
+    text-align: justify;
+  }
+.coma{
+  align-self: flex-end;
+}
+.coma-img{
+  width: 100px;
+}
+
+
+  @media (max-width:768px) {
+    .admin-containers{
+      flex-direction: column;
+    }
+    .admin-counselling1{
+      width: 100vw;
+      padding: 20px;
+      
+    }
+    .admin-counselling2{
+       width: 100vw;
+       padding: 10px;
+    }
+    .admin-counselling-head{
+      font-size: 1.2rem;
+    }
+    .admin-counselling-para{
+      font-size: 0.9rem;
+      text-align: justify;
+    }
+    .admin-inner3,.admin-inner1{
+    display: none;
+    
+  }
+  }
+</style>
+
+<div class="admin-container-fluid">
+  <div class="admin-containers">
+    <div class="admin-counselling1 text-center">
+      <h1 class="admin-counselling-head season text-bold">Admissions Isn't Luck - It's Strategy</h1>
+    </div>
+    <div class="admin-counselling2">
+      <div class="admin-inner1"><img class="coma-img" src="{% static 'img/coma1.png' %}" alt=""></div>
+      <div class="admin-inner2">
+        <p class="admin-counselling-para">Working with Elite Ivy was the best decision we made for our son's college journey. His insight, strategy, and honesty were unmatched. From selecting the right colleges to crafting essays that truly reflected our son's voice, Salabat was there every step of the way. Thanks to his guidance, our son was accepted into Columbia with scholarships</p>
+        <p class="admin-counselling-para">- Parent of Admitted Student, Class of 2024</p>
+      </div>
+      <div class="admin-inner3"><img class="coma coma-img" src="{% static 'img/coma2.png' %}" alt=""></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<style>
+.school-det{
+  background-color: #03362f;
+}
+.orange{
+  color: #e56032;
+}
+.white{
+  color: white;
+}
+.school-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  padding: 20px;
+  width: 100%;
+}
+.school-admi-details{
+  background-color: #f9f1e8;
+}
+
+.school-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.school-table td {
+  border: 1px solid rgb(4, 53, 4); /* Inner cell borders */
+  text-align: center;
+}
+
+/* Remove outer border by removing borders from first and last row + cells */
+.school-table tr:first-child td {
+  border-top: none;
+}
+
+.school-table tr:last-child td {
+  border-bottom: none;
+}
+
+.school-table tr td:first-child {
+  border-left: none;
+}
+
+.school-table tr td:last-child {
+  border-right: none;
+}
+
+.counter,.counterr {
+  font-size: 5rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 0px;
+  color: #003c32;
+}
+.table-para{
+  font-weight: 600;
+  margin-top: -15px;
+  font-size: 1.5rem;
+}
+tr td p{
+  margin: 0px;
+}
+
+.animated-heading, .animated-heading-white {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 1px;
+}
+
+.animated-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #e56032;
+  width: 0;
+  transition: width 1.5s ease-out;
+}
+
+.white::after{
+  background-color: white;
+}
+
+.animated-heading.animate::after {
+  width: 100%;
+}
+
+.green{
+  color: #03362f;
+}
+.table-td{
+  justify-content: center;
+  align-items: center;
+  color: #03362f;
+  font-size: 18px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.percentage-head{
+  font-size: 2.3vw;
+}
+.percentage-para{
+  font-size: 1vw;
+}
+
+.para{
+  font-size: 1vw;
+}
+.school-det{
+  padding: 10vh 5vw;
+}
+.percentage-div{
+  width: 85%;
+}
+
+.percentage-main-div{
+  width: 100%;
+}
+
+.table-para1.table-para2{
+  padding: 10px !important;
+}
+
+/* Desktop view - 4 columns */
+@media (min-width: 768px) {
+  .school-table {
+    display: table;
+    width: 100%;
+  }
+  .school-table tr {
+    display: table-row;
+  }
+  .school-table td {
+    width: 25%;
+    display: table-cell;
+  }
+}
+
+/* Mobile view - 2 columns */
+@media (max-width: 1150px) {
+  .counter,.counterr {
+  font-size: 4rem;
+}
+.table-para{
+  font-size: 1.3rem;
+}
+}
+
+@media (max-width: 950px) {
+  .counter,.counterr {
+  font-size: 3.5rem;
+}
+.table-para{
+  font-size: 1.2rem;
+}
+}
+
+@media (max-width: 767px) {
+  .school-table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .school-table tbody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+  .school-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+  .school-table td {
+    width: 50%;
+    box-sizing: border-box;
+    display: block;
+  }
+  .table-td{
+    padding: 20px 10px;
+  }
+  .school-table-container{
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Adjust borders for mobile view */
+  .school-table tr:first-child td:nth-child(-n+2) {
+    border-top: none;
+  }
+  .school-table tr:last-child td:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+  .school-table td:nth-child(odd) {
+    border-left: none;
+  }
+  .school-table td:nth-child(even) {
+    border-right: none;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .counter,.counterr {
+  font-size: 2.5rem;
+}
+.table-para{
+  font-size: 0.8rem;
+}
+}
+</style>
+
+<div class="container-fluid school-admi-details size-control">
+  <div class="row d-flex">
+    <div class="col-12 col-md-12 head d-flex order-1 order-md-0 flex-column justify-content-center">
+      <div class="row m-0 p-1 p-md-5 school-table-container">
+        <table class="school-table">
+          <tbody>
+            <tr>
+              <td class="table-para1 table-td"><p class="counter" id="counter1" data-target="90">0%</p><p class="table-para season">Harvard University</p></td>
+              <td class="table-para2 table-td"><p class="counter" id="counter2" data-target="75">0%</p><p class="table-para season">Stanford University</p></td>
+              <td class="table-para1 table-td"><p class="counter" id="counter3" data-target="90">0%</p><p class="table-para season">Brown University</p></td>
+              <td class="table-para2 table-td"><p class="counter" id="counter4" data-target="71">0%</p><p class="table-para season">Dartmouth College</p></td>
+            </tr>
+            <tr>
+              <td class="table-td"><p class="counter" id="counter5" data-target="81">0%</p><p class="table-para season">Princeton University</p></td>
+              <td class="table-td"><p class="counter" id="counter6" data-target="72">0%</p><p class="table-para season">Cornell University</p></td>
+              <td class="table-td"><p class="counter" id="counter7" data-target="84">0%</p><p class="table-para season">Columbia University</p></td>
+              <td class="table-td"><p class="counter" id="counter8" data-target="92">0%</p><p class="table-para season">Yale University</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  .undergraduate-para{
+    font-size: 1rem;
+  }
+  .admin_counselling_head{
+    font-weight: 800;
+    font-size: 2rem;
+  }
+  .udergraduate{
+    text-decoration: overline;
+  }
+
+  @media (max-width:768px) {
+    .admin_counselling_head{
+      font-size: 1.5rem;
+    }
+    .undergraduate-para{
+      font-size: 0.9rem !important;
+      text-align: justify;
+      text-indent: 30px;
+    }
+  }
+</style>
+
+
+
+
+<div class="container-fluid bg-white py-3 py-md-5">
+  <div class="row p-md-5 p-4 p-md-0">
+    <div class="col-md-8 col-12 ">
+      <div class="col-12 m-0 p-0  profile-part">
+          <h1 class="orange mt-1 admin_counselling_head udergraduate season">
+            Undergraduate Admissions
+          </h1>   
+      </div>
+    </div>
+    <div class="col-12">
+      <p class="para undergraduate-para">We provide guidance and support to students and families throughout the college application process. Our services include assistance with college research and selection, essay writing, interview preparation, and financial aid applications.</p>
+      <p class="para undergraduate-para"><strong>Additional Support Services:</strong> We offer a range of supplementary services to support our students' success, including homework help, academic coaching, and college application workshops. Completing application forms and aiming for college scholarship. </p>
+      <p class="para undergraduate-para">Our scope of work is tailored to meet the unique needs of each student and family. We work closely with students and parents to develop a customized plan that addresses their specific academic goals and challenges. Our approach is grounded in a commitment to academic excellence, individualised attention, and a deep understanding of the needs of our clients.</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<style>
+  .ofer-head{
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .ofer-sup-head{
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .ofer-para{
+    font-size: 1rem;
+  }
+
+  @media (max-width:768px) {
+    .ofer-head{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .ofer-sup-head{
+    font-size: 1rem;
+  }
+  .ofer-para{
+    font-size: 0.8rem;
+    text-align: justify;
+    text-indent: 30px;
+  }
+  }
+
+</style>
+
+<div class="p-4 p-md-5">
+  <h1 class="ofer-head season green">What We Offer</h1>
+  <p class="ofer-sup-head season green m-1 mb-md-2 mt-3">✅ College & University Selection</p>
+  <p class="ofer-para">We help identify the right-fit schools based on your academic performance, personal goals, and long-term aspirations.</p>
+
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Personalized School Recommendations</p>
+<p class="ofer-para">Using data-driven insights and profile evaluation, we propose universities that align with your strengths — academically, socially, and financially.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ IELTS / TOEFL Preparation</p>
+<p class="ofer-para">Our in-house language expert, Syeda Urooj, provides targeted coaching to help you excel in English proficiency exams required for U.S. admissions.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ College Application Essay Support</p>
+<p class="ofer-para">We work closely with you to brainstorm, draft, edit, and polish standout essays that reflect your voice and story authentically.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Application Filing</p>
+<p class="ofer-para">We ensure all parts of your Common App, UC app, or direct university applications are completed thoroughly and submitted on time.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Dashboard for Seamless Communication</p>
+<p class="ofer-para">We create a personalized dashboard for each student to track progress, manage deadlines, and organize every piece of application data in one place.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Letters of Recommendation</p>
+<p class="ofer-para">Need help drafting or guiding your recommenders? We assist with framing strong letters that align with your application theme.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Scholarship Applications</p>
+<p class="ofer-para">We help identify and apply for merit-based and need-based scholarships, grants, and financial aid opportunities.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ University Visit Planning</p>
+<p class="ofer-para">If you're planning campus visits, we help arrange meetings, prepare campus tour plans, and suggest key questions to ask admissions officers.</p>
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Visa Counseling</p>
+<p class="ofer-para">We provide full support for U.S. student visa applications, from document prep to mock interviews.</p>
+Note: Visa issuance is solely at the discretion of the consular officer.
+
+<p class="ofer-sup-head season green m-1 mb-md-2">✅ Post-Arrival Support in the U.S.</p>
+<p class="ofer-para">From airport pickup coordination to housing guidance and orientation advice, we continue supporting our students even after they arrive in the U.S.</p>
+</div>
+
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+  <div class="video-section">
+    <video autoplay muted loop>
+      <source src="{% static 'img/hero3.3.mp4' %}" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-text">
+      <p>
+      Don't let college rejection be your student's fate. Early planning is the key to a successful application. We can map out a schedule...
+      </p>
+      <h1 class="season">Before it's too Late</h1>
+    </div>
+  </div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<style>
+  .admin_counselling_head{
+    font-size: 2rem;
+  }
+  .admin_counselling_mini{
+    font-size: 1.3rem;
+  }
+  .graduate-para{
+    font-size: 1rem;
+  }
+  .graduate-head{
+    text-decoration: overline;
+  }
+@media (max-width:768px) {
+  .admin_counselling_head{
+    font-size: 1.5rem;
+  }
+  .admin_counselling_mini{
+    font-size: 1rem;
+  }
+  .graduate-para{
+    font-size: 0.8rem;
+    text-align: justify;
+    text-indent: 30px;
+  }
+}
+  
+  
+</style>
+
+
+
+
+<div class="container-fluid bg-white py-3">
+  <div class="row p-md-5 p-3">
+    <div class="col-md-8 col-12">
+      <div class="col-12 m-0 p-0 profile-part">
+          <h1 class="orange admin_counselling_head graduate-head season mt-0">
+            Graduate School Admissions
+          </h1>   
+      </div>
+    </div>
+    <div class="col-12">
+      <p class="strong  admin_counselling_mini-head text-bold">Advanced degrees demand advanced strategy — we're here to make it count.</p>
+      <p class=" graduate-para">Advanced degrees demand advanced strategy — we're here to make it count.Applying to graduate school in the U.S. is not just about grades and test scores. It's about showing purpose, potential, and precision. Whether you're aiming for an Ivy League master's, a STEM-focused PhD, an MBA, MPH, or an M.Arch — Elite Ivy Admissions ensures your application is not just complete, but compelling.</p>
+      <p class=" graduate-para">Led by senior admissions strategist Salabat Khan, our team has helped applicants get into competitive programs at Harvard, Stanford, Columbia, MIT, Berkeley, NYU, and beyond. From recent graduates to mid-career professionals, we craft a story that speaks to admissions committees.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<div class=" py-3 pr-4 pl-4 pr-md-5 pl-md-5">
+  <h1 class="ofer-head season green">What We Offer</h1>
+  <p class="ofer-sup-head green mb-1 mb-md-2 mt-3">✅ Graduate Program Selection</p>
+  <p class="ofer-para">We help identify the right-fit schools based on your academic performance, personal goals, and long-term aspirations. We help shortlist programs that match your academic profile, research interests, and career goals — including funding opportunities.</p> 
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Statement of Purpose (SOP) & Essays</p>
+<p class="ofer-para">We specialize in crafting strong, authentic SOPs that show why you're a perfect fit for the program — and what you'll bring to it.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Resume & Academic CV Editing</p>
+<p class="ofer-para">We transform standard CVs into graduate-ready academic resumes that highlight research, internships, work experience, and publications.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Letters of Recommendation Guidance</p>
+<p class="ofer-para">We help you choose the right recommenders and guide them (or help you draft) impactful, focused LORs that support your application story.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Letters of Recommendation Guidance</p>
+<p class="ofer-para">We ensure all parts of your Common App, UC app, or direct university applications are completed thoroughly and submitted on time.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Timeline & Application Management</p>
+<p class="ofer-para">From GRE/GMAT/TOEFL/IELTS scheduling to final submission, we help manage your entire application process with clarity and precision.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Letters of Recommendation</p>
+<p class="ofer-para">Need help drafting or guiding your recommenders? We assist with framing strong letters that align with your application theme.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Scholarship & Funding Application Support</p>
+<p class="ofer-para">We assist with applying to fellowships, research assistantships, and merit-based funding within your target schools.</p>
+
+<p class="ofer-sup-head green mb-1 mb-md-2">✅ Visa Support</p>
+<p class="ofer-para">Complete F-1 visa application support, document prep, and mock interviews for a stress-free process. Note: Visa issuance is solely at the discretion of the consular officer.</p>
+
+
+<p class="ofer-sup-head green mb-0 mb-md-2">✅ Post-Arrival Support in the U.S.</p>
+<p class="ofer-para">From airport pickup coordination to housing guidance and orientation advice, we continue supporting our students even after they arrive in the U.S.</p>
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<style>
+  
+  .green {
+    color: #003c32;
+  }
+
+  .admition-counsling-head {
+    font-size: 2rem;
+  }
+
+  .admition-counsling-para {
+    font-size: 1rem;
+  }
+
+  .lineargradiant {
+    background-image: linear-gradient(to right, #03362f, #e56032);
+  }
+  .text-underline{
+    text-decoration: underline;
+  }
+
+  @media (max-width:768px) {
+    .admition-counsling-head{
+      font-size: 1.5rem;
+    }
+     .admition-counsling-para {
+    font-size: 0.9rem;
+  }
+  
+  }
+</style>
+
+<div class="containerr-fluid lineargradiant py-0 py-md-3 mt-0 mt-md-0">
+  <div class="row">
+    <div class="col-12 p-4 p-md-5">
+      <h1 class="text-white text-bold season head admition-counsling-head">
+        Fill out a short form for a free demo class or consultation
+      </h1>
+      <p class="para admition-counsling-para text-white">
+        Our team will respond within 12 hours. <a href="" class="text-white text-underline">Click Here</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  
+  .list-type-none{
+    list-style-type: none;;
+  }
+  .ProBono-para{
+    font-size: 1rem;
+    
+  }
+  .probono-head{
+    font-size: 2rem;
+    text-decoration: overline;
+  }
+  .probono-li{
+    font-size: 1rem;
+  }
+
+  @media (max-width:768px) {
+  .admin_counselling_head{
+    font-size: 1.5rem;
+  }
+  .ProBono-para{
+    font-size: 0.9rem;
+    text-align: justify;
+    text-indent: 30px;
+  }
+  .probono-li{
+    font-size: 0.9rem;
+  }
+  }  
+</style>
+
+
+
+
+<div class="container-fluid bg-white py-md-0 py-3  py-md-3">
+  <div class="row  p-3 p-md-5 ">
+    <div class="col-8">
+      <div class="col-12 m-0 p-0 profile-part">
+          <h1 class="mt-1 orange probono-head season">
+            ProBono
+          </h1>   
+      </div>
+    </div>
+    <div class="col-12">
+      <p class="strong ProBono-para">Because every student with potential deserves a chance — not just those who can afford it.</p>
+<p class="ProBono-para">At Elite Ivy Admissions, we believe in educational equity. While we offer premium, personalized services for students around the world, we also dedicate a portion of our time and resources each year to pro bono admissions support for exceptional students from underprivileged backgrounds.</p>
+<p class="ProBono-para">We know that brilliance is not bound by circumstance — and we're committed to giving deserving students the tools, strategy, and mentorship needed to unlock doors at top U.S. universities.</p>
+
+<ul class="ProBono-para-li mt-0 p-0">
+  <li class="list-type-none">Our pro bono program is highly selective and designed for students who:</li>
+  <ul class="probono-li">
+    <li class="ml-0 ml-md-5">Come from low-income or disadvantaged backgrounds.</li>
+  <li class="ml-0 ml-md-5">Demonstrate outstanding academic achievement or unique personal resilience.</li>
+  <li class="ml-0 ml-md-5">Are applying to undergraduate or graduate programs in the U.S.</li>
+  <li class="ml-0 ml-md-5">Lack access to quality admissions guidance.</li>
+  </ul>
+</ul>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+<style>
+  .counsell-head{
+    font-size: 2rem;
+  }
+  .bold-700{
+    font-weight: 600;
+  }
+  .counsell-para{
+      font-size: 1rem;
+    }
+  @media (max-width:768px) {
+    .counsell-head{
+      font-size: 1.5rem;
+    }
+    .counsell-para{
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+
+
+
+<div class="container-fluid bg-white">
+  <div class="row pl-4 pr-4 pl-md-5 pr-md-5">
+    <div class="col-12 col-md-8">
+      <div class="col-12 m-0 p-0  profile-part">
+          <h1 class="green bold-700 counsell-head season">
+            What We Offer (Fully Free of Charge)
+          </h1>   
+      </div>
+    </div>
+    <div class="col-12">
+
+<p class="counsell-para">✅ Strategic school selection.</p>
+<p class="counsell-para">✅ Essay guidance and editing.</p>
+<p class="counsell-para">✅ Resume review and development.</p>
+<p class="counsell-para">✅ Application filing support.</p>
+<p class="counsell-para">✅ Scholarship and financial aid application assistance.</p>
+<p class="counsell-para">✅ Interview prep (including college/visa interviews).</p>
+<p class="counsell-para">✅ Post-admission guidance.</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+<style>
+  .how-apy{
+      font-size: 2rem;
+    }
+    .how-apy-para{
+      font-size: 1rem;
+    }
+  @media (max-width:768px) {
+    .how-apy{
+      font-size: 1.5rem;
+    }
+    .how-apy-para{
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<div class="container-fluid bg-white">
+  <div class="row pl-4 pr-4 pl-md-5 pr-md-5">
+    <div class="col-12 col-md-8">
+      <div class="col-12 m-0 p-0  profile-part">
+          <h1 class="green bold-700 how-apy season counsell-head">
+            How to Apply
+          </h1>   
+      </div>
+    </div>
+    <div class="col-12">
+<ul class="mt-0 p-0">
+  <li class="list-type-none how-apy-para">To be considered for our pro bono support, applicants must:</li>
+  <ol>
+    <li class="ml-0 ml-md-4 mb-3 how-apy-para">Submit a short application including academic records and personal background.</li>
+  <li class="ml-0 ml-md-4 mb-3 how-apy-para">Provide a statement of need and intent.</li>
+  <li class="ml-0 ml-md-4 mb-3 how-apy-para">Demonstrate high motivation and willingness to commit to the process.</li>
+  </ol>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+<style>
+  .green {
+    color: #003c32;
+  }
+
+  .admition-counsling-head {
+    font-size: 2.5rem;
+  }
+
+  .admition-counsling-para {
+    font-size: 1.5rem;
+  }
+
+  .lineargradianttt {
+    background-color: #03362f;
+  }
+  .text-underline{
+    text-decoration: underline;
+  }
+  .interested{
+     border-radius: 50px;
+     margin: 50px;
+  }
+  @media (max-width:800px) {
+    .interested{
+     border-radius: 0px;
+     margin: 0px;
+  }
+    .admition-counsling-head {
+    font-size: 1.5rem;
+  }
+
+  .admition-counsling-para {
+    font-size: 0.9rem;
+  }
+  }
+</style>
+
+<div class=" interested lineargradianttt py-3 mt-5">
+  <div class="row">
+    <div class="col-12 pr-5 pl-5">
+      <h1 class="orange season head admition-counsling-head">
+        Interested or know someone who could benefit?
+      </h1>
+      <p class="para admition-counsling-para orange ">
+         Reach out to us at [your email] with subject line “Pro Bono Request” to get started.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+
+{% endblock %}
+
+

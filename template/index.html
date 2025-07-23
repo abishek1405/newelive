@@ -1,0 +1,1970 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<style>
+  .video-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000 url("{% static 'img/spin.gif' %}") no-repeat center center;
+    background-size: 100%;
+    z-index: 1;
+  }
+  
+  .video-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-container {
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  position: relative; /* required for absolute positioning inside */
+  background-color: #000;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 30px; /* distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: auto;
+  text-align: center;
+}
+
+.bg-video {
+  /* New approach - will show full video without cropping */
+  width: 100vw;
+  height: 100%;
+  object-fit: cover; /* Changed back to cover to fill container */
+}
+
+
+  @keyframes slideDownHero {
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideUpHero {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @media (min-width:1300px) {
+     .img-hero{
+      width: 100% !important;
+     }
+  }
+
+   @media (max-width:2000px) {
+     .hero-container {height: 80vh;}
+     .nav-item .nav-link{font-size: 1.5rem !important; font-weight: 600 !important;}
+     .navbar-brand{font-size: 1.5rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+     .call-us{font-size: 1.2vw;}
+  }
+   @media (max-width:1800px) {
+    .hero-container {height: 80vh;}
+     .nav-item .nav-link{font-size: 1.5rem !important; font-weight: 600 !important;}
+     .navbar-brand{font-size: 1.5rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+     .call-us{font-size: 1.5vw;}
+  }
+  @media (max-width:1500px) {
+    .hero-container {height: 80vh;}
+     .nav-item .nav-link{font-size: 1.5rem !important; font-weight: 600 !important;}
+     .navbar-brand{font-size: 1.5rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+     .call-us{font-size: 1.5vw;}
+     .mini{font-size: 5vw;}
+     .bg-video {width: 100vw;}
+  }
+  @media (max-width:1400px) {
+     .hero-container {height: 70vh;}
+     .nav-item .nav-link{font-size: 1.5rem !important; font-weight: 600 !important;}
+     .navbar-brand{font-size: 1.5rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+     .call-us{font-size: 1.5vw;}
+     .bg-video {width: 100vw;}
+  }
+  @media (max-width:1200px) {
+     .hero-container {height: 60vh;}
+     .nav-item .nav-link{font-size: 1.3rem !important; font-weight: 600 !important;}
+     .navbar-brand{font-size: 1rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+     .call-us{font-size: 1.7vw;}
+     .bg-video {width: 100vw;}
+  }
+
+
+  @media (max-width:1000px) {
+    .hero-container {height: 50vh;}
+    .bg-video { width: 100vw; height: 100% !important; object-fit: cover; /* Changed back to cover to fill container */}
+    .nav-item .nav-link{font-size: 1rem !important; font-weight: 600 !important;}
+    .navbar-brand{font-size: 1rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+  }
+
+ 
+   @media (max-width:850px) {
+    .nav-item .nav-link{font-size: 0.8rem !important; font-weight: 600 !important;}
+    .navbar-brand{font-size: 0.8rem !important; padding: 3px 15px !important; font-weight: 600 !important;}
+   
+  }
+
+  @media (max-width:500px) {
+     .hero-container {height: 40vh;}
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1rem;
+    background-color: transparent;
+    animation: slideDown 0.8s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes slideDown {
+    0% { top: -50px; opacity: 0; }
+    100% { top: 0; opacity: 1; }
+  }
+
+  /* Nav Items Animation */
+  .navbar-nav .nav-item {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInUp 0.8s forwards;
+  }
+
+  .navbar-nav .nav-item:nth-child(1) { animation-delay: 0.2s; }
+  .navbar-nav .nav-item:nth-child(2) { animation-delay: 0.5s; }
+  .navbar-nav .nav-item:nth-child(3) { animation-delay: 0.7s; }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;  
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .nav-links-container {
+    width: 100%;
+  }
+
+  .nav-links-container ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 30px;
+    justify-content: flex-end;
+  }
+
+  .toggle-button {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 769px) {
+   .navbar {
+     display: flex;
+     flex-direction: row !important;
+     justify-content: space-between;
+     flex-wrap: nowrap;
+     align-items: center;
+     padding: 10px 20px;
+     width: 99vw;
+     background-color: transparent;
+   }
+
+   .nav-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+      width: 100vw;
+   }
+   .navbar-brand {
+     order: 1;
+   }
+   .navbar-brand{font-size: 1.5rem; padding: 3px 15px !important; font-weight: 600 !important; color: white;}
+   .index-nav-mini{
+     display: none;
+   }
+  }
+
+
+
+  @media (max-width: 768px) {
+    .nav-links-container {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: white;
+      position: absolute;
+      top: 100%;
+      right: 1rem;
+      width: 220px;
+      z-index: 999;
+      padding: 1rem;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .index-nav{
+      display: none;
+    }
+    .index-nav-mini{
+    display: block;
+    }
+    .navbar-toggler{
+      font-size: 24px;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .navbar-toggler:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .nav-links-container.show {
+      display: flex;
+    }
+    .navbar-nav {
+      flex-direction: column;
+      width: 100%;
+    }
+    .toggle-button {
+      display: block;
+    } 
+    .navbar-brand {
+      display: none;
+      font-size: 3vw;
+    }
+    .mini {
+      display: block;
+      padding: 0px;
+      margin: 0px;
+    }
+    .nav-link{
+      font-size: 1rem !important;
+      
+    }
+  }
+
+
+
+  .header-logo{
+    width: 150px !important;
+  }
+
+  .indexnone{
+    display: none;
+  }
+
+
+
+
+  @media (max-width:768px) {
+    .hero-content{
+      width: 100% !important;
+    }
+  }  
+
+  @media (max-width: 500px) {
+   .navbar {
+     padding-left: 0px !important;
+     padding-right: 0px !important;
+   }
+   .mini-links{
+    padding-left: 30px !important;
+     
+   }
+   .nav-space{
+    padding: 5px !important;
+   }
+  }
+</style>
+
+
+
+
+
+
+<div class="index-nav-mini">
+  <nav class="navbar nav-space navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand mini" href="#"><img  src="{% static 'img/footer.png' %}"  alt="Elite Ivy Logo"  class="header-logo w-100"/></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link mini-links active" href="/about">ABOUT</a>
+        <a class="nav-link mini-links active" href="/admin_counselling">ADMISSIONS COUNSELLING</a>
+        <a class="nav-link mini-links active" href="#">TUTORING</a>
+        <a class="nav-link mini-links active" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+</div>
+
+
+<header class="hero-section position-relative">
+  <div id="video-loader" class="video-loader"></div>
+  <nav class="navbar index-nav">
+    {% if page == 'index' %}
+      <a class="navbar-brand call-us" href="#"><i class="fa-solid fa-phone-volume"></i> CALL US FOR A FREE CONSULTATION</a>
+    {% endif %}
+    <div class="nav-links-container" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/about">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin_counselling">ADMISSIONS COUNSELLING</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">TUTORING</a></li>
+        <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero-container">
+    <div class="video-wrapper">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto"
+          poster="{% static 'img/hero1_preview.jpg' %}" 
+          class="bg-video">
+      <source src="{% static 'img/hero1.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <center>
+    <div class="hero-content" >
+      <img src="{% static 'img/herocon.png' %}" class="w-75 img-hero"  alt="">
+    </div>
+  </center>
+  </div>
+</header>
+<script>
+  window.addEventListener("load", function () {
+    const video = document.getElementById("hero-video");
+    const loader = document.getElementById("video-loader");
+
+    if (!video) {
+      console.error("Video element not found!");
+      return;
+    }
+
+    video.addEventListener("canplaythrough", function () {
+      loader.style.display = "none";
+    });
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 10000);
+  });
+</script>
+
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------ ------------------------------------------>
+
+
+
+<style>
+  .company-head {
+    font-size: 1.5rem;
+    margin: 0px;
+  }
+  .index-head-container{
+    background-color: #fffdfb;
+    margin: 0px;
+  }
+
+  @media (max-width:1000px) {
+    .company-head {font-size: 1rem;}
+  }
+</style>
+
+
+<div class="text-center py-4 index-head-container">
+  <p class="company-head Sans ">
+    Engaging with millions of constituents at leading institutions
+  </p>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+    /* Common styles for both marquees */
+    .marquee-container {
+        margin: 0px 0;
+    } 
+    
+    .marquee, .marquee-reverse {
+        display: flex;
+        height: 80px;
+        position: relative;
+        overflow: hidden;
+        margin: 10px 0;
+        mask-image: linear-gradient(
+            to right,
+            hsl(0 0% 0% / 1),
+            hsl(0 0% 0% / 1) 20%,
+            hsl(0 0% 0% / 1) 80%,
+            hsl(0 0% 0% / 1)
+        );
+    }
+
+    /* Right to Left Marquee (first row) */
+    .marquee {
+        --item-width: 200px;
+        --item-spacing: 200px; /* Increased spacing between items */
+        --duration: 50s; /* Slightly faster duration */
+        --items: 8;
+    }
+
+ 
+   @media (max-width:1200px) {
+     .marquee {
+        --item-width: 200px !important;
+        --item-spacing: 500px; /* Increased spacing between items */
+    }
+    
+  }
+   @media (max-width:700px) {
+     .marquee {
+        --item-width: 120px !important;
+        --item-spacing: 250px; /* Increased spacing between items */
+    }
+    .marquee, .marquee-reverse {
+      height: 40px;
+    }
+  }
+ 
+
+
+ 
+  
+
+    .marquee__item {
+        width: var(--item-width);
+        height: auto;
+        position: absolute;
+        left: calc(100% + (var(--item-width) + var(--item-spacing))); /* Added spacing */
+        animation: rightToLeft linear var(--duration) infinite;
+        animation-delay: calc(var(--duration) / var(--items) * (var(--items) - var(--item-index)) * -1);
+    }
+
+    @keyframes rightToLeft {
+        to {  
+            left: calc((var(--item-width) + var(--item-spacing)) * -1); /* Added spacing */
+        }
+    }
+
+
+    /* Left to Right Marquee (second row) */
+    .marquee-reverse {
+        --item-width: 200px;
+        --item-spacing: 200px; /* Increased spacing between items */
+        --duration: 50s; /* Slightly faster duration */
+        --items: 8;
+    }
+
+    
+   @media (max-width:1200px) {
+     .marquee-reverse {
+        --item-width: 200px !important;
+        --item-spacing: 500px; /* Increased spacing between items */
+    }
+    
+  }
+   @media (max-width:700px) {
+     .marquee-reverse {
+        --item-width: 120px !important;
+        --item-spacing: 250px; /* Increased spacing between items */
+    }
+  }
+ 
+  
+
+    .marquee-reverse__item {
+        width: var(--item-width);
+        height: auto;
+        position: absolute;
+        left: calc((var(--item-width) + var(--item-spacing)) * -1); /* Added spacing */
+        animation: leftToRight linear var(--duration) infinite;
+        animation-delay: calc(var(--duration) / var(--items) * var(--item-index) * -1);
+    }
+
+    @keyframes leftToRight {
+        to {  
+            left: calc(100% + var(--item-width) + var(--item-spacing)); /* Added spacing */
+        }
+    }
+
+    /* Rounded corners for items */
+    .marquee__item:nth-child(4n), 
+    .marquee-reverse__item:nth-child(4n) {
+        border-top-right-radius: 1rem;
+    }
+
+    .marquee__item:nth-child(4n + 1), 
+    .marquee-reverse__item:nth-child(4n + 1) {
+        border-bottom-right-radius: 1rem;
+    }
+
+    .marquee__item:nth-child(4n + 2), 
+    .marquee-reverse__item:nth-child(4n + 2) {
+        border-bottom-left-radius: 1rem;
+    }
+
+    .marquee__item:nth-child(4n + 3), 
+    .marquee-reverse__item:nth-child(4n + 3) {
+        border-top-left-radius: 1rem;
+    }
+
+    /* Assign item indexes */
+    .marquee__item:nth-of-type(1),
+    .marquee-reverse__item:nth-of-type(1) {
+        --item-index: 1;
+    }
+    .marquee__item:nth-of-type(2),
+    .marquee-reverse__item:nth-of-type(2) {
+        --item-index: 2;
+    }
+    .marquee__item:nth-of-type(3),
+    .marquee-reverse__item:nth-of-type(3) {
+        --item-index: 3;
+    }
+    .marquee__item:nth-of-type(4),
+    .marquee-reverse__item:nth-of-type(4) {
+        --item-index: 4;
+    }
+    .marquee__item:nth-of-type(5),
+    .marquee-reverse__item:nth-of-type(5) {
+        --item-index: 5;
+    }
+    .marquee__item:nth-of-type(6),
+    .marquee-reverse__item:nth-of-type(6) {
+        --item-index: 6;
+    }
+    .marquee__item:nth-of-type(7),
+    .marquee-reverse__item:nth-of-type(7) {
+        --item-index: 7;
+    }
+    .marquee__item:nth-of-type(8),
+    .marquee-reverse__item:nth-of-type(8) {
+        --item-index: 8;
+    }
+</style>
+
+<!-- First row - Right to Left -->
+<div class="marquee-container">
+    <div class="marquee">
+        <img class="marquee__item" src="{% static 'img/com11.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com22.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com33.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com44.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com55.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com66.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com77.webp' %}" alt="">
+        <img class="marquee__item" src="{% static 'img/com88.webp' %}" alt="">
+    </div>
+</div>
+
+<!-- Second row - Left to Right -->
+<div class="marquee-container">
+    <div class="marquee-reverse">
+      <img class="marquee-reverse__item" src="{% static 'img/com-9.webp' %}" alt="">  
+      <img class="marquee-reverse__item" src="{% static 'img/com-10.webp' %}" alt="">
+      <img class="marquee-reverse__item" src="{% static 'img/com-11.webp' %}" alt="">
+      <img class="marquee-reverse__item" src="{% static 'img/com-12.webp' %}" alt="">
+      <img class="marquee-reverse__item" src="{% static 'img/com-13.webp' %}" alt="">
+        <img class="marquee-reverse__item" src="{% static 'img/com-14.webp' %}" alt="">
+        <img class="marquee-reverse__item" src="{% static 'img/com-15.webp' %}" alt="">
+        <img class="marquee-reverse__item" src="{% static 'img/com-16.webp' %}" alt="">
+    </div>
+</div>
+
+
+
+
+  <script>
+      function hideSpinner(img) {
+        img.previousElementSibling.style.display = 'none'; // Hide spinner
+        img.classList.remove('d-none'); // Show image
+      }
+    </script>  
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+.school-det{
+  background-color: #03362f;
+  padding: 10vh 5vw;
+}
+
+.school-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+  padding: 20px;
+}
+.school-table {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+.school-table td {
+  border: 1px solid rgb(4, 53, 4); /* Inner cell borders */
+  text-align: center;
+}
+
+/* Remove outer border by removing borders from first and last row + cells */
+.school-table tr:first-child td {
+  border-top: none;
+}
+
+.school-table tr:last-child td {
+  border-bottom: none;
+}
+
+.school-table tr td:first-child {
+  border-left: none;
+}
+
+.school-table tr td:last-child {
+  border-right: none;
+}
+
+.counter {
+      font-size: 4.5vw;
+      font-weight: 800;
+      text-align: center;
+      padding: 0px;
+      
+      color: #003c32;
+    }
+    .table-para{
+      font-weight: 600;
+      font-size: 1.8vw;
+
+    }
+    tr td p{
+      margin: 0px;
+    }
+
+</style>
+
+
+
+
+<style>
+  .animated-heading, .animated-heading-white {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 1px;
+}
+
+
+
+.animated-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #e56032;
+  width: 0;
+  transition: width 1.5s ease-out;
+}
+
+.white::after{
+  background-color: white;
+}
+
+
+.animated-heading.animate::after {
+  width: 100%;
+}
+
+.table-td{
+  justify-content: center;
+  align-items: center;
+  color: #03362f;
+  font-size: 18px;
+}
+
+.percentage-head{
+  font-size: 2.8vw;
+}
+.percentage-para{
+  font-size: 1.5vw;
+}
+
+.para{
+  font-size: 1.5vw;
+}
+
+.percentage-div{
+  width: 85%;
+}
+
+.percentage-main-div{
+  width: 100%;
+}
+
+.table-para1.table-para2{
+  padding: 10px !important;
+}
+
+@media (max-width:950px) {
+  .percentage-head{
+    font-size: 2.8vw;
+  }
+}
+
+
+@media (max-width:767px) {
+  .percentage-head{
+    font-size: 1.5rem;
+  }
+  .percentage-para,.para{
+    font-size: 0.8rem;
+  }
+  .percentage-div{
+    width: 100%;
+  }
+  .school-det{
+    padding: 20px 30px;
+  }
+  .para{
+    margin-top: 0px !important;
+  }
+  .head-down{
+    margin-top: -5px !important;
+  }
+  .school-table td{
+    padding: 50px 10px;
+  }
+  .counter{
+    font-size: 3rem;
+  }
+  .table-para{
+    font-size: 1rem;
+    font-weight: 800;
+  }
+}
+
+
+@media (max-width:420px) {
+  .percentage-head{
+    font-size: 1rem;
+  }
+  .percentage-para,.para{
+    font-size: 0.6rem;
+  }
+  .table-para{
+    margin-top: -18px;
+  }
+}
+</style>
+
+
+
+
+<div class="container-fluid   school-admi-details size-control">
+  <div class="row   d-flex ">
+    <div class="col-12   col-md-5 head d-flex  order-1 order-md-0 flex-column justify-content-center">
+      <div class="row m-0 p-0 school-table-container">
+        <table class="school-table">
+          <tr>
+            <td class="table-para1 table-td"><p class="counter" id="counter1" data-target="90">0%</p><p class="table-para season">Harvard University</p></td>
+            <td class="table-para2 table-td"><p class="counter" id="counter2" data-target="75">0%</p><p class="table-para season">Stanford University</p></td>
+          </tr>
+          <tr>
+            <td class="table-td"><p class="counter" id="counter3" data-target="84">0%</p><p class="table-para season">Columbia University</p></td>
+            <td class="table-td"><p class="counter" id="counter4" data-target="92">0%</p><p class="table-para season">Yale University</p></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="school-det  col-12 col-md-7   d-flex  flex-column justify-content-center">
+      <div class="percentage-main-div">
+        <h1 class="head orange"><span class="animated-heading percentage-head season">Outperform In College Admissions:</span></h1>
+      <h1 class="head orange head-down percentage-head season">Our Record In Securing Elite Spots</h1>
+      </div>
+    <div class="percentage-div">
+      <p class="para sans white mt-4">
+      With over <span class="animated-heading percentage-para white sans">90% of our students admitted to top 20 colleges</span>
+      and multiple Ivy League acceptances each year, our proven strategies consistently place students in the most competitive institutions in the country.
+    </p>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+ <style>
+  
+    .help-section {
+      padding: 25px 2px;
+      background: linear-gradient(to right, #03362f, #ff914d);
+      color: white;
+      text-align: center;
+    }
+
+    .help-section h2 {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .option-btn {
+      border: 2px solid white;
+      color: white;
+      padding: 8px 30px;
+      border-radius: 30px;
+      background: transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      font-size: 1rem;
+      
+    }
+ 
+
+
+    .option-btn:hover {
+      background-color: white;
+      color: #003c32;
+    }
+
+    .note {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .help-head{
+      font-size: 2rem;
+    }
+   
+@media (max-width:1600px) {
+.help-head{
+      font-size: 2rem;
+    }
+    .option-btn {
+      font-size: 1rem;
+    }
+    .note{
+      font-size: 1rem;
+    }
+}
+    @media (max-width:767px) {
+      .help-head{
+        font-size: 1.5rem;
+      }
+
+      .options {
+        gap: 10px;
+      }
+      
+      .option-btn {
+      border: 1px solid white;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.7rem;
+    }
+    .note{
+      font-size: 0.8rem;
+    }
+    }
+  </style>
+
+
+
+<div class="help-section py-5">
+  <h1 class="help-head season text-bold">What can we help you with?</h1>
+  <div class="options mt-4 mt-md-5">
+    <button class="option-btn">Admissions Counselling</button>
+    <button class="option-btn">SAT</button>
+    <button class="option-btn">AP'S</button>
+    <button class="option-btn">GRE</button>
+    <button class="option-btn">GMAT</button>
+    <button class="option-btn">NEET</button>
+    <button class="option-btn">TOEFL*</button>
+    <button class="option-btn">IELTS*</button>
+    <button class="option-btn">NATA</button>
+  </div>
+  <div class="mt-4 mt-md-5">
+    <p class="note">*IELTS/TOEFL taught for free with admissions counselling package</p>
+  </div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+  <style>
+    .experience{
+        font-size: 1rem;
+        margin-top: -10px;
+        font-weight: 400;
+      }
+      .Experience-head{
+        font-size: 2rem;
+      }
+      .icon-exp{
+        font-size: 1rem;
+        margin-right: 8px !important;
+    }
+    .counterr {
+        font-size: 6rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 0px;
+        color: #003c32;
+      }
+      @media (max-width:1600px) {
+        .Experience-head{
+          font-size: 2rem;
+        }
+        .counterr{
+          font-size: 4rem;
+        }
+        .experience{
+          font-size: 1rem;
+          font-weight: 400;
+        }
+      }
+      @media (max-width:767px) {
+        .counterr{
+          font-size: 3rem;
+        }
+        .experience,.icon-exp{
+          font-size: 1rem;
+        }
+        .exp-container{
+          padding: 0px;
+        }
+        .experience{
+          margin-top: -15px;
+        }
+        .Experience-head{
+          font-size: 1.5rem;
+        }
+        .icon-exp{
+        margin-right: 0px !important;
+        }
+      }
+  </style>
+
+
+
+
+    <section class="container py-5">
+      <div class="section-title ">
+        <h1 class="Experience-head text-center text-bold green season">Experience You Can Trust</h1>
+      </div>
+      <div class="row text-center">
+        <div class="col-12 col-md-4 mt-3 mt-md-0 exp-container">
+          <strong><h1 class="counterr" id="counter5" data-target="25"><b>0+</b></h1></strong><p class="green experience table-para"><i class="icon-exp fa-regular fa-clock"></i> Years in Industry</p>
+        </div>
+        <div class="col-12 col-md-4 mt-3 mt-md-0 exp-container">
+          <strong><h1 class="counterr" id="counter6" data-target="100"><b>0+</b></h1></strong><p class="green experience table-para"><i class="icon-exp fa-solid fa-graduation-cap"></i> Students Helped</p>
+        </div>
+        <div class="col-12 col-md-4 mt-3 mt-md-0 exp-container">
+          <strong><h1 class="counterr" id="counter7" data-target="4.9"><b>0/</b></h1></strong><p class="green experience table-para"><i class="icon-exp fa-regular fa-star"></i> Rating by students</p>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+<script>
+  function animateCounterr(element, target, duration = 1000) {
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentValue = Math.floor(progress * target);
+      if(target === 4.9){
+        element.textContent = currentValue + '/5';  
+      }else{
+        element.textContent = currentValue + '+';
+      }
+      
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        if(target === 4.9){
+          element.textContent = target + '/5';  
+        }else{
+          element.textContent = target + '+';
+        }
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Animate all .counter elements when in view
+  const counterss = document.querySelectorAll('.counterr');
+  const observerr = new IntersectionObserver((entries, observerr) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.getAttribute('data-target'));
+        animateCounterr(el, target);
+        observerr.unobserve(el); // run only once per element
+      }
+    });
+  }, { threshold: 0.6 });
+
+  counterss.forEach(counter => {
+    observerr.observe(counter);
+  });
+</script>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  .meat-container{
+    background-image: url("{% static 'img/hero2.jpg' %}");
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .meet-the-team{
+    background-image: linear-gradient(to right, #003c32cb ,#ff914db4);
+    width: 100vw;
+  }
+  .team-members-profile-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+  }
+  
+  .meet-team{
+    font-size: 2rem !important;
+  }
+  .meat-text{
+    font-size: 1rem;
+    margin: 0px;
+    font-weight: 600;
+  }
+ .team-mebers-img{
+  width: 100% !important;
+  border-radius: 10px;
+ }
+
+@media (max-width:1600px) {
+  .meet-team{
+    font-size: 2rem;
+  }
+  .meat-text{
+    font-size: 1rem;
+  }
+}
+@media (max-width:768px) {
+  .meat-text{
+    font-size: 1rem;
+  }
+  .meet-team{
+    font-size: 1.5rem !important;
+  }
+ 
+}
+</style>
+<div class="meat-container ">
+<div class="col-12 col-md-9  meet-the-team">
+    <section class=" container-fluid py-5">
+      <div class="section-title  text-center">
+        <h1 class="text-white text-bold meet-team season">
+        MEET THE TEAM OF CONSULTANTS
+      </h1>
+    </div>
+      <div class="row">
+        <div class="col-12  col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3 ">
+            
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12  col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="p-4 team-members-profile-details mt-0 mt-md-3">
+            <img src="{% static 'img/profile.png' %}" class="team-mebers-img" alt="team-member">  
+            <h3 class="meat-text mt-3 text-white">NAME</h3>
+              <p class="meat-text text-white">University</p>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+</div>
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<style>
+  .admin-head{
+    background-color: #003c32;
+    border-radius: 50px;
+    padding: 10px 40px;
+    width: fit-content;
+    font-size: 2rem;
+  }
+  .admin-para{
+    color: #302f80;
+    font-weight: 800;
+    font-size: 1.2rem;
+    }
+.admin-head-inner{
+  color: #f47b30;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: 800;
+}
+
+.animated-headingg {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.animated-headingg::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #003c32; /* Use your brand orange instead of #fcfcfc */
+  width: 0;
+  transition: width 1.5s ease-out;
+}
+.admin-content{
+  font-size: 1rem;
+}
+
+.animated-headingg.animate::after {
+  width: 100%;
+}   
+
+@media (max-width:1600px) {
+  .admin-head{
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0px;
+  }
+  .admin-para{
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+   .admin-head-inner{
+    font-size: 1.2rem;
+  }
+  .admin-content{
+    font-size: 1rem;
+  }
+}
+@media (max-width:768px) {
+  .admin-head{
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    background-color: transparent !important;
+    color: black !important;
+    font-weight: 700;
+  }
+  .admin-para{
+    font-size: 1rem !important;
+  }
+  .admin-head-inner{
+    font-size: 1.2rem;
+  }
+  .admin-content{
+    font-size: 0.9rem;
+  }
+}
+
+
+</style>
+
+
+<div class="col-11  container-fluid py-4 py-md-5 p-2 p-md-4">
+  <div class="row text-center">
+    <div class="col-12 mb-4">
+      <center><h1 class="admin-head  text-white season text-bold">New Admission? Waitlisted or Deferred?</h1></center>
+      <p class="admin-para mt-md-5 mt-2 season">
+        Our services have a proven track record of success, helping students secure spots in some of the most prestigious institutions nationwide from Ivy League universities to top liberal arts colleges.
+      </p>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-md-3 p-0">
+        <h5 class="admin-head-inner season"><span class="animated-heading animated-headingg">Admissions Strategy that Works</span></h5>
+        <p class="text-left admin-content">
+          Each student partners with a dedicated strategist to craft a personalized school list aligned with their goals and strengths. We guide students through smart decisions about application timelines across the entire process.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-md-3 p-0">
+        <h5 class="admin-head-inner season"><span class="animated-heading animated-headingg">Leadership & Activities Guidance</span></h5>
+        <p class="text-left admin-content">
+          Our Extracurricular Mentors help students build a strong and distinctive extracurricular profile, ensuring their Activities List reflects depth, initiative, and meaningful impact.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-md-3 p-0">
+        <h5 class="admin-head-inner season"><span class="animated-heading animated-headingg">Essay Writing Development</span></h5>
+        <p class="text-left admin-content">
+          From brainstorming and outlining to multiple rounds of feedback and final polishing, our Essay Mentors support students in crafting standout personal statements, supplemental essays, and short answers that truly reflect who they are.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .video-text {
+      color: rgb(0, 0, 0);
+      max-width: 90%;
+      padding: 2rem;
+      text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.527);
+    }
+
+    .video-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .video-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .video-text h1 {
+        font-size: 1.3rem;
+      }
+
+      .video-text p {
+        font-size: 0.9rem;
+      }
+      .video-text{
+        padding: 1rem;
+        text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.164);
+      }
+    }
+  </style>
+
+
+  <div class="video-section">
+    <video autoplay muted loop>
+      <source src="{% static 'img/hero2.2.mp4' %}" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-text">
+      <h1 class="d-none d-md-block season">Toward a more complete student journey</h1>
+      <h1 class="d-block d-md-none season">Enhancing student progress</h1>
+      <p>Create the student journey you've always envisioned — not just the one your current systems allow. 
+         Our agents seamlessly operate within your existing data and systems to engage, support, and nurture 
+         students from prospect to post-graduation.</p>
+    </div>
+  </div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<div class="container-fluid col-11 py-2 py-md-5 p-md-4 p-2 mt-4">
+  <div class="row text-left">
+      <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-0 p-md-3 shadow-none">
+        <h5 class="admin-head-inner season animated-heading animated-headingg">Academic Acceleration</h5>
+        <p class="text-left admin-content">
+          Beyond boosting scores on the SAT, GRE, and AP exams, our academic tutors also advise students on strategic course selection—ensuring they meet the top admissions priority: academic excellence.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-0 p-md-3 shadow-none">
+        <h5 class="admin-head-inner season animated-heading animated-headingg">Research and Work Experience</h5>
+        <p class="text-left admin-content">
+          Our students gain access to college-level research programs that can result in standout, publishable papers. In addition, our curated internship opportunities offer real-world experience at top companies like Google, Apple, and more.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-4  admin-container">
+      <div class="p-0 p-md-3 shadow-none">
+        <h5 class="admin-head-inner season animated-heading animated-headingg">Exclusive Services for Students admitted to US Universities</h5>
+        <p class="text-left admin-content">
+          Transportation services from the airport to the university, along with assistance in completing essential tasks required for living in the United States, including bank account setup and phone registration specifically tailored to students.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------phone--------------------------------------------------------------------------------------------------- -->
+<style>
+  .video-carousel-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(to right, #0f3c35, #e87e35);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+  }
+
+  .video-carousel-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  .video-carousel-section .video-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease;
+  }
+
+  @media (max-width: 768px) {
+    .video-carousel-section h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="video-carousel-section d-block d-md-none">
+  <h1 class="season">Hear What Our Parents And Students Have To Say</h1>
+  <div class="carousel-container col-md-9 col-12">
+    <div class="video-slider" id="videoSliderMobile">     
+      <div id="carouselExampleFade" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active text-center">
+            <video class="d-block w-100" controls loop playsinline>
+              <source src="{% static 'img/hear1.mp4' %}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="mt-3">
+              <h5>Saad</h5>
+              <p>Accepted to Seattle University</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item text-center">
+            <video class="d-block w-100" controls loop playsinline>
+              <source src="{% static 'img/hear2.mp4' %}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="mt-3">
+              <h5>Saad</h5>
+              <p>Accepted to Seattle University</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item text-center">
+            <video class="d-block w-100" controls loop playsinline>
+              <source src="{% static 'img/hear2.mp4' %}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="mt-3">
+              <h5>Saad</h5>
+              <p>Accepted to Seattle University</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------------------------------ Desktop ----------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+<!-- ------------------------------------------------------------------------------ Desktop ----------------------------------------------------------------------------------- -->
+<style>
+  .desktop-video-carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+    background: linear-gradient(to right, #0f3c35, #e87e35);
+  }
+  
+  .desktop-video-carousel .hear {
+    font-size: 2rem;
+    color: white;
+  }
+
+  .desktop-video-carousel .text-leftt {
+    text-align: left !important;
+    color: white;
+  }
+
+  @media (max-width: 1600px) {
+    .desktop-video-carousel .hear {
+      font-size: 2rem;
+    }
+    .desktop-video-carousel .text-leftt {
+      font-size: 1rem;
+    }
+  }
+
+  .desktop-video-carousel .video-slider-container {
+    position: relative;
+    max-width: 1200px;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 100px;
+  }
+
+  .desktop-video-carousel .video-slider-desktop {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 50px;
+    justify-content: center;
+  }
+
+  .desktop-video-carousel .video-slide {
+    flex: 0 0 33.33%;
+    padding: 10px;
+    margin: 0px 0px;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-video-carousel .video-slide {
+      flex: 0 0 100%;
+    }
+  }
+
+  .desktop-video-carousel .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: white;
+    border: none;
+    color: #0f3c35;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .desktop-video-carousel .carousel-btn:hover {
+    background: #e87e35;
+    color: white;
+  }
+
+  .desktop-video-carousel .carousel-btn.left {
+    left: 0;
+  }
+
+  .desktop-video-carousel .carousel-btn.right {
+    right: 0;
+  }
+</style>
+
+<div class="desktop-video-carousel d-md-block d-none">
+  <div class="container">
+    <div class="section-title text-center">
+      <h1 class="hear season">Hear What Our Parents And Students Have To Say</h1>
+    </div>
+
+    <div class="video-slider-container mt-4">
+      <button class="carousel-btn left" onclick="moveDesktopSlide(-1)"><i class="fa-solid fa-left-long"></i></button>
+      <button class="carousel-btn right" onclick="moveDesktopSlide(1)"><i class="fa-solid fa-right-long"></i></button>
+
+      <div class="video-slider-desktop" id="videoSliderDesktop">
+        
+        <div class="video-slide">
+          <div class="hear-con">
+            <video src="{% static 'img/hear1.mp4' %}" class="w-100 hear-video" loop controls playsinline></video>
+            <h3 class="bold mt-2 text-leftt">Saad</h3>
+            <p class="bold text-leftt">Accepted to Seattle University</p>
+          </div>
+        </div>
+        <div class="video-slide">
+          <div class="hear-con">
+            <video src="{% static 'img/hear2.mp4' %}" class="w-100 hear-video" loop controls playsinline></video>
+            <h3 class="bold mt-2 text-leftt">Saad</h3>
+            <p class="bold text-leftt">Accepted to Seattle University</p>
+          </div>
+        </div>
+        <div class="video-slide">
+          <div class="hear-con">
+            <video src="{% static 'img/hero3.mp4' %}" class="w-100 hear-video" loop controls playsinline></video>
+            <h3 class="bold mt-2 text-leftt">Saad</h3>
+            <p class="bold text-leftt">Accepted to Seattle University</p>
+          </div>
+        </div>
+        <div class="video-slide">
+          <div class="hear-con">
+            <video src="{% static 'img/hear1.mp4' %}" class="w-100 hear-video" loop controls playsinline></video>
+            <h3 class="bold mt-2 text-leftt">Saad</h3>
+            <p class="bold text-leftt">Accepted to Seattle University</p>
+          </div>
+        </div>
+        <div class="video-slide">
+          <div class="hear-con">
+            <video src="{% static 'img/hero3.mp4' %}" class="w-100 hear-video" loop controls playsinline></video>
+            <h3 class="bold mt-2 text-leftt">Saad</h3>
+            <p class="bold text-leftt">Accepted to Seattle University</p>
+          </div>
+        </div>
+       
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Desktop slider functionality
+  let currentDesktopSlide = 0;
+  const slidesPerView = 3; // Always show 3 videos
+
+  function moveDesktopSlide(direction) {
+    const slider = document.getElementById('videoSliderDesktop');
+    const slides = document.querySelectorAll('.desktop-video-carousel .video-slide');
+    const maxSlides = slides.length;
+    const maxSlideIndex = Math.ceil(maxSlides / slidesPerView) - 1;
+
+    currentDesktopSlide += direction;
+
+    if (currentDesktopSlide < 0) currentDesktopSlide = 0;
+    if (currentDesktopSlide > maxSlideIndex) currentDesktopSlide = maxSlideIndex;
+
+    slider.style.transform = `translateX(-${currentDesktopSlide * (100 / slidesPerView)}%)`;
+  }
+
+  window.addEventListener("resize", () => {
+    // reset position when screen size changes
+    currentDesktopSlide = 0;
+    document.getElementById('videoSliderDesktop').style.transform = `translateX(0%)`;
+  });
+</script>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+ <style>
+
+    .faq-heading {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .accordion-button:not(.collapsed) {
+      color: #e56032;
+      background-color: transparent !important;
+    }
+    .accordion-button {
+      background-color: transparent !important;
+      border: none;
+      box-shadow: none;
+      color: #e56032;
+      font-size: 1.2rem;
+    }
+    .accordion-button:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .accordion-item {
+      border: none;
+      border-bottom: 1px solid #4d4a4a;
+    }
+    .frequently{
+      background-color: white !important;
+    }
+    @media (max-width:1650px) {
+      .accordion-button{
+        font-size: 1.2rem;
+      }
+    }
+     @media (max-width:650px) {
+      .faq-heading{
+        font-size: 1.5rem;
+      }
+      .accordion-button{
+        font-size: 1rem;
+      }
+      .accordion-body{
+        font-size: 0.8rem;
+      }
+      .accordion-button{
+          border: none;
+          outline: none;
+          box-shadow: none; 
+          
+      }
+     }
+  </style>
+
+
+
+
+
+
+
+
+
+<div class="container frequently col-12 py-5">
+  <div class="container frequently col-12 col-md-11">
+  <h2 class="faq-heading mb-4 season orange">Frequently Asked Questions</h2>
+  <div class="accordion" id="faqAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+          When should I start working with Elite Ivy's?
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          It's best to start as early as possible to allow for planning, development, and support throughout high school.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+          What is Elite Ivy's success rate?
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Our students have consistently been admitted to top colleges including Ivy League institutions.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+          Does Elite Ivy's guarantee admission to a specific college?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          No, we do not guarantee admission. However, we maximize your chances with strategic planning and mentorship.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+          How do I get started with Elite Ivy's?
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          You can book a free consultation through our website to get started.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFive">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+          How much does Elite Ivy's cost?
+        </button>
+      </h2>
+      <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Our packages vary depending on the level of service and duration. Contact us for detailed pricing.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingSix">
+        <button class="accordion-button py-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+          Does Elite Ivy's offer scholarship?
+        </button>
+      </h2>
+      <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          We occasionally offer financial assistance based on need and merit. Please inquire during consultation.
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+<style>
+.fillout{
+  font-size: 2rem;
+}
+.fill-para{
+  font-size: 1.5rem;
+}
+@media (max-width:600px) {
+  .fillout{
+    font-size: 1.5rem;
+  }
+  .fill-para{
+  font-size: 1rem;
+}
+}
+</style>
+
+
+
+<div class="container-fluid  meet-the-team">
+    <section class="container-fluid col-12 col-md-11 py-5 ">
+      <div class="section-title text-left">
+        <h1 class="text-white fillout season">
+        Fill out a short form form a free demo class or consultation
+      </h1>
+      <h3 class="text-white fill-para season">
+        out team will respond within 12 hours. <a class="text-white" style="text-decoration: underline;" href="/">Click Here</a>
+      </h3>
+    </div>
+    </section>
+</div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+
+{% endblock %}
+
+

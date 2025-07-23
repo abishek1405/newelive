@@ -1,0 +1,377 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .video-text {
+      color: rgb(0, 0, 0);
+      max-width: 90%;
+      padding: 2rem;
+      text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.527);
+    }
+
+    .video-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .video-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .video-text h1 {
+        font-size: 1.3rem;
+      }
+
+      .video-text p {
+        font-size: 0.9rem;
+      }
+      .video-text{
+        padding: 1rem;
+        text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.164);
+      }
+    }
+  </style>
+
+
+  <div class="video-section">
+    <video autoplay muted loop>
+      <source src="{% static 'img/hero2.2.mp4' %}" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-text">
+        
+      <h1 class="d-block d-md-none season">High School Counselors are overwhelmed</h1>
+      <p>
+        High school counselors often can't offer the personalized attention
+      students need to get into the college of their dreams. And with
+      non-college responsibilities, they may well not be experts in college
+      admissions.
+      </p>
+    </div>
+  </div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    
+    
+  }
+  .profile {
+    width: 100%;
+  }
+</style>
+
+<style>
+  .profile-part,
+  .profile-part90 {
+    display: inline-block;
+    position: relative;
+    padding-top: 8px; /* optional, to give space if needed */
+  }
+
+  .green {
+    color: #003c32;
+  }
+  .head {
+    font-size: 3vw;
+  }
+  .para {
+    font-size: 1.3vw;
+  }
+  .lii {
+    list-style-type: none;
+    padding: 0px;
+    margin-top: 0px;
+  }
+
+  .ull {
+    padding: 0;
+  }
+
+  .about-div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .content-cuter {
+    width: 95%;
+    border-top: #e56032 2px solid;
+  }
+
+  .admin_counselling_head {
+    font-size: 2vw;
+    text-align: left;
+    border-top: #e56032 2px solid;
+  }
+
+
+  @media (max-width:1600px) {
+    .content-para{
+      font-size: 1rem;
+
+    }
+  }
+
+  @media (max-width:768px) {
+    .admin_counselling_head{
+      font-size: 1.5rem;
+    }
+    .content-para{
+      font-size: 0.8rem;
+      text-align: justify;
+    }
+    .content-cuter {
+    width: 100%;
+    border-top: none;
+  }
+  .about-div{
+    margin-top: -30px;
+  }
+  }
+</style>
+
+<div class="container-fluid bg-white py-0 mt-5 p-4 p-md-5 py-md-5">
+  <div class="row">
+    <div class="col-12 col-md-4 text-center profile-container">
+      <ul class="ull col-12 col-md-7 animated-heading profile-part">
+        <li class="lii">
+          <h1 class="orange admin_counselling_head season">
+            IS HIRING A COLLEGE COUNSELOR WORTH IT?
+          </h1>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 animated-heading p-3 p-md-0 about-div profile-part90">
+      <div class="content-cuter">
+        <p class="para content-para sans">
+          Exceptional independent college counselors strategically position
+          students for admission to their dream universities. From the moment a
+          student begins working with them, these counselors craft a
+          personalized roadmap for the high school journey (or the remaining
+          years of it). This includes selecting the most challenging courses,
+          preparing for the right standardized tests, pursuing standout
+          extracurriculars, building strong relationships for compelling letters
+          of recommendation, showing demonstrated interest to target colleges,
+          and much more.
+        </p>
+        <p class="para content-para sans">
+          Perhaps most importantly, top-tier college counselors help reduce the
+          tension and pressure that often arise within families during the
+          admissions process. Say goodbye to slammed doors and heated dinner
+          table debates over essay topics—professional guidance brings clarity
+          and calm.
+        </p>
+        <p class="para content-para sans">
+          But in our experience, most students grow to love the best college
+          they're accepted into. That's why our primary focus is helping them
+          gain admission to the most prestigious institutions their profiles can
+          realistically support.
+        </p>
+        <p class="para content-para sans">
+          It's not that counselors who prioritize “fit” aren't effective—it's
+          just that we see it as a softer approach. At Elite Ivy , our mission
+          is clear: to help students get into their dream schools. Families who
+          work with us can count on that goal being front and center in
+          everything we do.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-white py-0 py-md-5">
+  <div class="row">
+    <div class="col-12 col-md-4 text-center profile-container">
+      <ul class="ull col-12 col-md-7 animated-heading profile-part">
+        <li class="lii">
+          <h1 class="orange admin_counselling_head season">
+            INDEPENDENT COLLEGE COUNSELORS VS. HIGH SCHOOL COUNSELORS
+          </h1>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 animated-heading p-3 p-md-0 about-div profile-part90">
+      <div class="content-cuter">
+        <p class="para content-para sans">
+          Not long ago, research showed that each public high school counselor
+          was, on average, tasked with guiding nearly 300 students. Even in
+          smaller schools, the ratio can be daunting. While many of these
+          counselors care deeply about their students, the sheer volume of their
+          workload—much of which has little to do with college admissions—makes
+          it difficult for them to provide expert guidance on getting into
+          top-tier universities.
+        </p>
+        <p class="para content-para sans">
+          And the picture isn't necessarily brighter at the country's top
+          private schools. Even when the ratios are more favorable, counselors
+          at elite prep schools often have their own biases. Some play
+          favorites, advocating more strongly for students whose families are
+          closely tied to the institution. Others may discourage students from
+          applying to certain colleges, not because the students aren't
+          qualified, but to limit internal competition among applicants.
+        </p>
+        <p class="para content-para sans">
+          Moreover, even at these prestigious schools, counselors rarely have
+          the bandwidth to help students build unique extracurricular profiles
+          that captivate admissions officers—or to revise multiple drafts of
+          personal statements until they truly shine.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-white py-0 py-md-5">
+  <div class="row">
+    <div class="col-12 col-md-4 text-center profile-container">
+      <ul class="ull col-12 col-md-7 animated-heading profile-part">
+        <li class="lii">
+          <h1 class="orange admin_counselling_head season">
+            THE RISE OF PRIVATE COLLEGE COUNSELORS
+          </h1>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 animated-heading p-3 p-md-0 about-div profile-part90">
+      <div class="content-cuter">
+        <p class="para content-para sans">
+          This is where private college counselors come in. A national survey
+          conducted in 2013 found that about 26% of high-achieving high school
+          students sought the guidance of private admissions consultants. In our
+          view, that number likely falls short of reality—many students simply
+          prefer not to admit they had help navigating the highly competitive
+          college admissions process.
+        </p>
+        <p class="para content-para sans">
+          At Elite Ivy, we like to joke that we often end up working with
+          siblings, frequently with cousins, but almost never with friends. Why?
+          Because parents often prefer to share that their child got into a top
+          university entirely on their own—and that's completely okay with us.
+          Still, if over a quarter of high-performing students admitted to using
+          private counseling services back in 2013, imagine how much that number
+          has grown since.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+<style>
+  .green {
+    color: #003c32;
+  }
+
+  .admition-counsling-head {
+    font-size: 2rem;
+  }
+
+  .admition-counsling-para {
+    font-size: 1rem;
+  }
+
+  .lineargradiant {
+    background-color: #03362f;
+  }
+
+  @media (max-width:768px) {
+     .admition-counsling-head {
+    font-size: 1rem;
+  }
+
+  .admition-counsling-para {
+    font-size: 0.8rem !important;
+  }
+  }
+</style>
+
+<div class="container-fluid lineargradiant py-5">
+  <div class="row">
+    <div class="col-12 pr-3 pl-3  pr-md-5 pl-md-5">
+      <h1 class="orange season head text-bold admition-counsling-head">
+        Interested or know someone who could benefit?
+      </h1>
+      <p class="para admition-counsling-para orange">
+        Reach out to us at [your email] with subject line “New Student” to get
+        started.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+
+{% endblock %}
+
+

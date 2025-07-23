@@ -1,0 +1,784 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elite Ivy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://kit.fontawesome.com/1cf1ca806e.js" crossorigin="anonymous"></script>
+    
+    <!-- common use -->
+    <style>
+      .orange {
+        color: #e56032;
+      }
+      .white {
+        color: white;
+      }
+      .green {
+        color: #003c32;
+      }
+      .text-bold{
+        font-weight: 700;
+      }
+      @font-face {
+          font-family: "TheSeasons";
+          src: url("{% static 'img/season.ttf' %}") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+      }
+      @font-face {
+          font-family: "thesans";
+          src: url("{% static 'img/sans.ttf' %}") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+      }
+      .season {
+        font-family: "TheSeasons";
+      }
+      .sans {
+        font-family: "thesans";
+      }
+    </style>
+
+    <style>
+        .top-bar{
+            background-image: linear-gradient(to right, #03362f, #e56032);
+            font-weight: 600;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+        }
+        .call-us{
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+          .call-us{
+            font-size: 1rem;
+          }
+        }
+        @media (max-width: 340px) {
+          .call-us{
+            font-size: 0.8rem;
+          }
+        }
+    </style>
+
+    {% if page != 'index' %}     
+        <div class="top-bar text-white ">
+            <i class="fa-solid fa-phone-volume call-us"></i> <p class="call-us">CALL US FOR A FREECONSULTATION</p>
+        </div>
+    {% endif %}
+    
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  .nav-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #f8f9fa;
+    
+  }
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  .nav-links-container {
+    width: 100%;
+  }
+  .nav-links-container ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 30px;
+    justify-content: flex-end;
+  }
+  .toggle-button {
+    display: none;
+    font-size: 24px;
+    background: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1000px) {
+    .navbar {
+      padding-left: 30px !important;
+      padding-right: 30px !important;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .navbar {
+      display: flex;
+      flex-direction: row !important;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 10px 20px;
+      width: 99vw;
+      background-color: #f8f9fa;
+    }
+    .nav-links-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100vw;
+    }
+    .navbar-brand {
+      order: 1;
+    }
+    .navbar-brand {
+      background-image: linear-gradient(to right, #03362f, #e56032);
+      color: white;
+      font-weight: 700;
+      padding: 0px 20px;
+      border-radius: 30px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+   
+  @media (max-width: 768px) {
+    .nav-links-container {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: white;
+      position: absolute;
+      top: 100%;
+      right: 1rem;
+      width: 220px;
+      z-index: 999;
+      padding: 1rem;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .nav-links-container.show {
+      display: flex;
+    }
+    .navbar-nav {
+      flex-direction: column;
+      width: 100%;
+    }
+    .navbar-toggler {
+      display: block;
+      border: none !important;
+      outline: none !important;
+      font-size: 24px;
+    }
+   
+  }
+
+
+  @media (min-width: 768px) {
+    .mini {
+      display: none;
+    }
+    .index-nav-mini{
+      display: none;
+    }
+    .uuu{
+      display: flex;
+    }
+    
+  }
+  @media (max-width:768px) {
+    .uuu{
+      display: none;
+    }
+    .index-nav-mini{
+      display: block;
+    }
+    .navbar-toggler:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+     .nav-link{
+      font-size: 1rem !important;
+      
+    }
+   
+  }
+
+
+  .header-logo{
+    width: 200px;
+  }
+
+  .nav-link {
+    color: rgb(18, 48, 10);
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .project-title {
+    background-image: none !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+  }
+  .header-text {
+    font-size: 2vw !important;
+  }
+  .header-logo {
+    width: 280px !important;
+    margin: 0px;
+  }
+  .nav-logo{
+    display: flex;
+  }
+  .nav-logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+
+@media (max-width: 1000px) {
+.nav-link {
+    color: rgb(18, 48, 10);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+  
+
+  @media (max-width: 500px) {
+   .navbar {
+     padding-left: 0px !important;
+     padding-right: 0px !important;
+   }
+   .mini-links{
+    padding-left: 1rem !important;
+     
+   }
+   .nav-space{
+    padding: 5px !important;
+   }
+    .header-logo{
+    width: 150px !important;
+  }
+  }
+    </style>
+    <link rel="stylesheet" href="https://your-font-kit-url.css" />
+  </head>
+
+  <body>
+  
+
+<div class="index-nav-mini">
+  <nav class="navbar nav-space navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img  src="{% static 'img/footer.png' %}"  alt="Elite Ivy Logo"  class="header-logo w-100"/></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link mini-links active" href="/about">ABOUT</a>
+        <a class="nav-link mini-links active" href="/admin_counselling">ADMISSIONS COUNSELLING</a>
+        <a class="nav-link mini-links active" href="#">TUTORING</a>
+        <a class="nav-link mini-links active d-none" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+</div>
+
+
+    <nav class="navbar uuu">
+      {% if page == 'index' %}
+      <style>
+        .uuu{
+          display: none;
+        }
+      </style>
+      {% else %}
+      <style>
+        .mini {
+          display: none;
+        }
+      </style>
+      <a href="/" class="navbar-brand project-title">
+        <div class="nav-logo project-title">
+          <img
+            src="{% static 'img/footer.png' %}"
+            alt="Elite Ivy Logo"
+            class="header-logo  w-100 me-3"
+          />
+        </div>
+      </a>
+      {% endif %}
+
+      <a class="navbar-brand mini indexnone" href="#">ELITE IVY</a>
+      <button class="toggle-button indexnone" onclick="toggleMenu()">☰</button>
+
+      <div class="nav-links-container" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/about">ABOUT</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin_counselling"
+              >ADMISSIONS COUNSELLING</a
+            >
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">TUTORING</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fa-solid fa-magnifying-glass"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <script>
+      function toggleMenu() {
+        const nav = document.getElementById("navbarNav");
+        nav.classList.toggle("show");
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content %} {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <style>
+      .footer-heading {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #e56032;
+      }
+
+      .footer-link {
+        display: block;
+        margin-bottom: 6px;
+        text-indent: 0px;
+        color: #c24624;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+      .footer-link:hover{
+        color: #e56032;
+      }
+
+      .footer-link:hover {
+        text-decoration: underline;
+      }
+
+      .newsletter-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #c24624;
+      }
+
+      .newsletter-input {
+        border: none;
+        background-color: transparent;
+        color: #c24624;
+        font-weight: bold;
+        width: 480px;
+        outline: none;
+        font-size: 1.4rem;
+      }
+
+      .footer-input {
+        border-bottom: 2px solid #f2b89c;
+      }
+      .footer-div {
+        border-top: 2px solid #f2b89c;
+        width: 75%;
+      }
+
+      .arrow-icon {
+        font-size: 1.5rem !important;
+        font-weight: 800;
+        margin-left: 10px;
+        color: #c24624;
+        cursor: pointer;
+      }
+
+      .newsletter-input::placeholder {
+        color: #c24624 !important;
+        font-size: 1.rem;
+      }
+
+
+    @media (max-width:1120px) {
+        .footer-heading{
+            font-size: 1rem;
+        }
+        .footer-link{
+            font-size: 0.9rem;
+        }
+      }
+
+
+    @media (max-width:769px) {
+        .newsletter-title{
+            font-size: 1.5rem;
+            align-self: flex-start;
+        }
+        .footer-input{
+            align-self: flex-start;
+            width: 100%;
+        }
+        .newsletter-input{
+            font-size: 1.5rem !important;
+            width: 100%;
+        }
+        .newsletter-input::placeholder {
+          font-size: 1rem;
+          color: #e56032 !important;
+        }
+        .footer-heading{
+            font-size: 1rem;
+        }
+        .footer-link{
+            font-size: 0.9rem;
+        }
+        .footer-input {
+                border-bottom: 1px solid #f2b89c;
+        }
+        .footer-div {
+            border-top: 1px solid #f2b89c;
+            width: 75%;
+        }
+        .newsletter-section,.footer-cols {
+            flex-direction: column;
+            }
+      }
+   
+    </style>
+
+    <div class="container-fluid col-11 py-0 py-md-4 mt-4">
+      <!-- Newsletter Section -->
+      <div class="d-flex align-items-center newsletter-section flex-wrap mb-5">
+        <div class="newsletter-title orange season">
+          Sign Up for Our Newsletter
+        </div>
+        <div class="d-flex align-items-center footer-input mt-3  ml-0 ml-md-5 mt-md-0">
+          <input
+            type="email"
+            class="newsletter-input sans"
+            placeholder="YOUR EMAIL"
+          />
+          <div class="arrow-icon orange">→</div>
+        </div>
+      </div>
+
+      <!-- Footer Links Section -->
+      <div class="row footer-cols sans">
+        <div class="col-md-3 col-12 mb-4">
+          <div class="footer-div"></div>
+          <div class="footer-heading orange">About</div>
+          <a href="#" class="footer-link">Meet the Elite Ivy</a>
+          <a href="/why_hire" class="footer-link">Why Hire</a>
+          <a href="#" class="footer-link">Refunds/Cancellation Policy</a>
+          <a href="#" class="footer-link">Testimonials</a>
+          <a href="#" class="footer-link">Careers</a>
+          <a href="#" class="footer-link">Contact Support</a>
+        </div>
+
+        <div class="col-md-3 col-12 mb-4">
+          <div class="footer-div"></div>
+          <div class="footer-heading orange">Admissions Counseling</div>
+          <a href="#" class="footer-link">Undergraduate Admissions</a>
+          <a href="#" class="footer-link">Graduate School Admissions</a>
+          <a href="#" class="footer-link">ProBono</a>
+        </div>
+
+        <div class="col-md-3 col-12 mb-4">
+          <div class="footer-div"></div>
+          <div class="footer-heading orange">Tutoring</div>
+          <a href="#" class="footer-link">SAT</a>
+          <a href="#" class="footer-link">GRE</a>
+          <a href="#" class="footer-link">AP's</a>
+          <a href="#" class="footer-link">TOEFL</a>
+          <a href="#" class="footer-link">IELTS</a>
+          <a href="#" class="footer-link">GMAT</a>
+          <a href="#" class="footer-link">NEET</a>
+          <a href="#" class="footer-link">NATA</a>
+        </div>
+
+        <div class="col-md-3 col-12 mb-4">
+          <div class="footer-div"></div>
+          <div class="footer-heading orange">Blog</div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      body {
+        background-color: #fffaf6;
+      }
+
+      .footer {
+        padding: 30px 0;
+        background-color: #fffaf6;
+      }
+
+      .footer-logo {
+        height: 11vw;
+      }
+      .footer-right {
+        text-align: right;
+      }
+      .footer-year {
+        font-size: 1.2rem;
+        color: #1d3f38;
+      }
+      .social-icons a {
+        color: #61817e;
+        font-size: 2rem;
+        color: #61817e;
+       
+      }
+      .social-icons {
+        display: flex;
+        gap: 1.5rem;
+        
+      }
+      .fab {
+        font-size: 2.5rem;
+      }
+
+      @media (min-width: 1000px) {
+        .footer {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+        }
+      }
+      @media (max-width: 1000px) {
+        
+        .footer-right {
+          align-self: center;
+        }
+        .footer-logo-container{
+            align-self: center;
+        }
+        .footer {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          justify-content: center;
+          padding: 10px;
+        }
+       .footer-year {
+        font-size: 1.2rem;
+        color: #1d3f38;
+      }
+      .social-icons a {
+        color: #61817e;
+        font-size: 2rem;
+        color: #61817e;
+       
+      }
+      .social-icons {
+        display: flex;
+        gap: 1.5rem;
+        
+      }
+      .fab {
+        font-size: 2.5rem;
+      }
+      }
+
+
+      @media (max-width:769px) {
+        
+        .footer-right{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+        .footer-content{
+          align-items: center !important;
+        }
+        .social-icons{
+          justify-content: space-evenly !important;
+          width: 100%;
+        }
+        .footer-logo{
+            height: auto;
+        }
+      }
+
+
+      @media (max-width: 400px) {
+        .footer-year {
+          font-size: 0.8rem;
+          padding: 0px;
+        }
+       
+        .fab {
+          font-size: 1.4rem;
+          padding: 0px;
+        }
+      }
+      
+    </style>
+    <!-- Footer Section -->
+    <div
+      class="container-fluid col-11 footer"
+    >
+      <!-- Left: Logo and Text -->
+      <div class="footer-logo-container col-12 col-md-8">
+        <img
+          src="{% static 'img/footer.png' %}"
+          alt="Elite Ivy Logo"
+          class="footer-logo w-100 me-3"
+        />
+      </div>
+      <!-- Right: Year and Social Icons -->
+      <div class="footer-right">
+        <div class="d-flex flex-column footer-content align-items-end flex-wrap">
+          <div class="footer-year mb-2">© 2025 eliteivycounseling.com</div>
+          <div class="social-icons mt-md-3 mt-0">
+            <a href="#"><i class="fab  fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function animateCounter(element, target, duration = 1000) {
+        const startTime = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const currentValue = Math.floor(progress * target);
+          element.textContent = currentValue + "%";
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            element.textContent = target + "%";
+          }
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      // Animate all .counter elements when in view
+      const counters = document.querySelectorAll(".counter");
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.getAttribute("data-target"));
+              animateCounter(el, target);
+              observer.unobserve(el); // run only once per element
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+
+      counters.forEach((counter) => {
+        observer.observe(counter);
+      });
+    </script>
+
+    <script>
+      window.onload = function () {
+        const targets = document.querySelectorAll(".animated-heading");
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              console.log(
+                "Observed:",
+                entry.target,
+                "Intersecting:",
+                entry.isIntersecting
+              );
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          }
+        );
+
+        targets.forEach((el) => observer.observe(el));
+      };
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

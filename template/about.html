@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .video-text {
+      color: rgb(0, 0, 0);
+      max-width: 90%;
+      padding: 2rem;
+      text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.527);
+    }
+
+    .video-text h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .video-text p {
+      font-size: 2rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .video-text h1 {
+        font-size: 1.3rem;
+      }
+
+      .video-text p {
+        font-size: 0.9rem;
+      }
+      .video-text{
+        padding: 1rem;
+        text-shadow: 10px 200px 200px rgba(248, 248, 248, 0.164);
+      }
+    }
+  </style>
+
+
+  <div class="video-section">
+    <video autoplay muted loop>
+      <source src="{% static 'img/hero2.2.mp4' %}" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="video-text">
+      <!-- <h1 class="d-block d-md-none season">High School Counselors are overwhelmed</h1> -->
+      <p>
+          A boutique consultancy that offers hyper-personalized mentorship for high-achieving students aiming for top 50 U.S. colleges. 
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<style>
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .profile {
+    width: 100%;
+  }
+</style>
+
+<style>
+  .profile-part,
+  .profile-part90 {
+    display: inline-block;
+    position: relative;
+    padding-top: 8px; /* optional, to give space if needed */
+    
+  }
+
+  .head {
+    font-size: 2.5rem;
+  }
+  .head-para{
+    font-size: 1.2rem;
+  }
+  .para {
+    font-size: 1rem;
+    text-indent: 0px;
+  }
+  .lii {
+    list-style-type: none;
+    padding: 0px;
+    margin-top: 17px;    
+  }
+
+  .ull {
+    padding: 0;
+    border-top: #e56032 2px solid;
+  }
+
+  .about-div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+  }
+
+  .content-cuter {
+    width: 95%;
+    border-top: #e56032 2px solid;
+  }
+  .head{
+      display: block;
+    }
+    .mini-head{
+      display: none;
+    }
+
+  @media (max-width: 768px) {
+     .head {
+    font-size: 2rem;
+  }
+  .head-para{
+    font-size: 1rem;
+    text-align: center;
+  }
+  .para {
+    font-size: 0.8rem;
+    text-indent: 2rem;
+    text-align: justify;
+  }
+    .ull{
+      border: none;
+    }
+    .profile{
+      width: 75%;
+    }
+    .head{
+      display: none;
+    }
+    .mini-head{
+      display: block;
+      text-align: center;
+    }
+    .content-cuter{
+      border: none;
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+    .about-div{
+      padding-top: 0px;margin-top: -30px;
+    }
+    
+  }
+</style>
+
+<div class="container-fluid bg-white py-0 py-md-5">
+  <div class="row">
+    <div class="col-12 col-md-4 text-center profile-container">
+      <ul class="ull col-12 col-md-7  animated-heading profile-part">
+        <li class="lii">
+          <img src="{% static 'img/passport.webp' %}" class="profile" alt="" />
+          <h1 class="season orange mini-head">Salabat Khan</h1>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 animated-heading about-div profile-part90 p-4 p-md-0">
+      <div class="content-cuter">
+        <h1 class="season orange head">Salabat Khan</h1>
+        <p class="head-para"><strong>U.S. College Admissions Strategist | Founder, Elite Ivy Admissions</strong></p>
+        <p class="para">
+          A seasoned U.S. undergraduate admissions strategist with a reputation for transforming student potential into Ivy League success stories. With over a decade of experience in the highly competitive college admissions landscape, Salabat has mentored hundreds of students across the globe to secure spots at top-tier universities including Harvard, Stanford, MIT, Princeton, and Columbia.
+        </p>
+        <p class="para">
+         Known for his data-driven strategies and no-nonsense approach, Salabat specializes in crafting compelling personal narratives, optimizing extracurricular profiles, and demystifying complex application processes like Early Decision, SAT/ACT strategy, and Common App execution. His consulting model combines deep psychological insight with insider-level knowledge of what elite schools really look for.
+        </p>
+        <p class="para">
+         When he's not decoding the admissions matrix, Salabat speaks at international college fairs, conducts mock interviews, and collaborates with high schools to build U.S.-focused college prep programs.
+        </p>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-white py-0 py-md-5">
+  <div class="row">
+    <div class="col-12 col-md-4 text-center profile-container">
+      <ul class="ull col-12 col-md-7 animated-heading profile-part">
+        <li class="lii">
+          <img src="{% static 'img/passport.webp' %}" class="profile" alt="" />
+          <h1 class="season orange mini-head">Syeda Urooj Khan</h1>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-8 animated-heading about-div profile-part90 p-4 p-md-0">
+      <div class="content-cuter">
+        <h1 class="season orange head">Syeda Urooj Khan</h1>
+        <p class="head-para"><strong>IELTS Trainer & Admissions Advisor | Elite Ivy Admissions</strong></p>
+        <p class="para">
+          With a calm, focused approach and a results-driven mindset, she has helped countless students achieve 7.5+ band scores—opening doors to top universities in the U.S., U.K., Canada, and beyond.
+
+        </p>
+        <p class="para">
+      Urooj brings more than just teaching expertise—she brings strategy. Her students consistently praise her for simplifying complex concepts, offering targeted feedback, and building the confidence needed to excel in every section: Listening, Reading, Writing, and Speaking.
+        </p>
+        <p class="para">
+          Beyond IELTS, Urooj plays an active role in the admissions process. She assists in editing standout personal statements, guiding students through mock interviews, and ensuring their communication is sharp, authentic, and aligned with top university expectations.
+        </p>
+        <p class="para">
+        Families and students alike trust Urooj not only for her knowledge, but for her dedication, warmth, and commitment to each student's success. With her support, students don't just pass a test—they step into global opportunities with confidence.
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- --> 
+
+
+
+
+
+
+{% endblock %}
+
+
